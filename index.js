@@ -25,15 +25,13 @@ client.on("message", async ({ author, guild, content, channel }) => {
             const regex = new RegExp("^(http|https)://", "i");
             if (!args[0] || !regex.test(args[0])) return channel.send("Please provide a valid url to a project you wish to obtain opinions on.");
             
-            const opChan = await guild.channels.find(channel => channel.name === `ops-${author.username}`);
+            const opChan = guild.channels.find(channel => channel.name === `ops-${author.username}`);
             if (opChan) return opChan.send(`[ everyone ] Please share your opinions on this: ${args[0]}`);
             
             const schannel = await guild.createChannel(`ops-${author.username}`, { type: "textchannel" }).catch(console.error);
             await schannel.setParent(category.id).catch(console.error);
 
-            const msg = await schannel.send(`[ everyone ] Please share your opinions on this: ${args[0]}`);
-                await msg.react("👍");
-                await msg.react("👎");
+            schannel.send(`[ everyone ] Please share your opinions on this: ${args[0]}`);
         break;
 
         case "opsclose":
