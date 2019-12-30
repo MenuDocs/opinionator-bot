@@ -4,13 +4,13 @@ const client = new Client()
 
 client.on("ready", () => {
     console.log(`Congratulations, ${client.user.username} is online!`)
-    client.user.setActivity("!help", { type: "WATCHING" })
+    client.user.setActivity("$help", { type: "WATCHING" })
 });
 
 client.on("message", async ({ author, guild, content, channel, }) => {
     if(author.bot || !content.startsWith(prefix) || !guild) return;
 
-    const prefix = "!"
+    const prefix = "$"
     const args = content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
 
