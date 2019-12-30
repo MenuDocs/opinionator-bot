@@ -1,1 +1,1 @@
-worker yarn bot
+worker node index.js
