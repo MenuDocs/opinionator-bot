@@ -1,5 +1,4 @@
 const { Client } = require("discord.js")
-const { token, prefix } = require("./config.json")
 const { stripIndents } = require("common-tags")
 const client = new Client()
 
@@ -11,6 +10,7 @@ client.on("ready", () => {
 client.on("message", async ({ author, guild, content, channel, }) => {
     if(author.bot || !content.startsWith(prefix) || !guild) return;
 
+    const prefix = "!"
     const args = content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
 
@@ -48,4 +48,4 @@ client.on("message", async ({ author, guild, content, channel, }) => {
 
 });
 
-client.login(token)
+client.login(process.env.TOKEN)

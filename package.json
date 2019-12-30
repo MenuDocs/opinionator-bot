@@ -3,7 +3,7 @@
   "version": "0.5.0",
   "description": "opinion bot 2k19",
   "scripts": {
-    "client": "node index.js"
+    "start": "node index.js"
   },
   "main": "index.js",
   "license": "MIT",
