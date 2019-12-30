@@ -31,7 +31,9 @@ client.on("message", async ({ author, guild, content, channel }) => {
             const schannel = await guild.createChannel(`ops-${author.username}`, { type: "textchannel" }).catch(console.error);
             await schannel.setParent(category.id).catch(console.error);
 
-            schannel.send(`[ @everyone ] Please share your opinions on this: ${args[0]}`);
+            const msg = await schannel.send(`[ @everyone ] Please share your opinions on this: ${args[0]}`);
+                await msg.react("👍");
+                await msg.react("👎");
         break;
 
         case "opsclose":
