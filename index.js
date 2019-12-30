@@ -26,7 +26,7 @@ client.on("message", async ({ author, guild, content, channel }) => {
             if (!args[0] || !regex.test(args[0])) return channel.send("Please provide a valid url to a project you wish to obtain opinions on.");
 
             const opChan = guild.channels.find(channel => channel.topic === author.id);
-            if (opChan) return opChan.send(`[ everyone ] Please share your opinions on this: ${args[0]}`);
+            if (opChan) return opChan.send(`[ @everyone ] Please share your opinions on this: ${args[0]}`);
 
             const sChannel = await guild.createChannel(`ops-${author.username}`, { 
                 type: "textchannel", 
@@ -34,7 +34,7 @@ client.on("message", async ({ author, guild, content, channel }) => {
                 topic: author.id 
             }).catch(console.error);
 
-            sChannel.send(`[ everyone ] Please share your opinions on this: ${args[0]}`);
+            sChannel.send(`[ @everyone ] Please share your opinions on this: ${args[0]}`);
             break;
 
         case "opsclose":
