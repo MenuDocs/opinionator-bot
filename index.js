@@ -20,13 +20,10 @@ client.on("message", async ({ author, guild, content, channel }) => {
             const regex = new RegExp("^(http|https)://", "i");
             if(!args[0] || !regex.test(args[0])) return channel.send("Please provide a valid url to a project you wish to obtain opinions on.");
 
-            const role = guild.roles.find(role => role.name === "Designer");
-            if(!role) return channel.send("Please create a Designer role.");
-
             const schannel = await guild.createChannel(`ops-${author.username}`, { type: "textchannel" }).catch(console.error);
             await schannel.setParent(category.id).catch(console.error);
 
-            schannel.send(`[ ${role} ] Please share your opinions on this: ${args[0]}`);
+            schannel.send(`[ @everyone ] Please share your opinions on this: ${args[0]}`);
         break;
 
         case "opsclose":
