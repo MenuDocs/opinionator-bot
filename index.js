@@ -1,6 +1,7 @@
 const { Client } = require("discord.js")
 const { stripIndents } = require("common-tags")
 const client = new Client()
+const prefix = "$"
 
 client.on("ready", () => {
     console.log(`Congratulations, ${client.user.username} is online!`)
@@ -9,8 +10,6 @@ client.on("ready", () => {
 
 client.on("message", async ({ author, guild, content, channel, }) => {
     if(author.bot || !content.startsWith(prefix) || !guild) return;
-
-    const prefix = "$"
     const args = content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
 
