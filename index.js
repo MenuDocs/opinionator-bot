@@ -10,6 +10,7 @@ client.on("ready", () => {
 
 client.on("message", async ({ author, guild, content, channel }) => {
     if(author.bot || !content.startsWith(prefix) || !guild) return;
+    
     const args = content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
 
