@@ -24,11 +24,9 @@ client.on("message", async ({ author, guild, content, channel }) => {
 
             const regex = new RegExp("^(http|https)://", "i");
             if (!args[0] || !regex.test(args[0])) return channel.send("Please provide a valid url to a project you wish to obtain opinions on.");
+            const size = guild.channels.filter(channel => channel.topic === author.id).size !== 0 ? guild.channels.filter(channel => channel.topic === author.id).size + 1 : "";
 
-            const opChan = guild.channels.find(channel => channel.topic === author.id);
-            if (opChan) return opChan.send(`[ @everyone ] Please share your opinions on this: ${args[0]}`);
-
-            const sChannel = await guild.createChannel(`ops-${author.username}`, { 
+            const sChannel = await guild.createChannel(`ops-${author.username}-${size}`, { 
                 type: "textchannel", 
                 parent: category.id, 
                 topic: author.id 
@@ -45,7 +43,7 @@ client.on("message", async ({ author, guild, content, channel }) => {
         case "help":
             channel.send(stripIndents`
             Commands:
-            **[ $ops ]** - Creates channel for opinions and pings the developer role.
+            **[ $ops ]** - Creates channel for opinions and pings everyone.
             **[ $opsclose ]** - Deletes channel the command is invoked in.
             ( Developed by Connor#4767 )
             `);
@@ -53,5 +51,6 @@ client.on("message", async ({ author, guild, content, channel }) => {
     }
 
 });
+
 
 client.login(process.env.TOKEN)
